@@ -13,6 +13,8 @@ import {
 } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
 import { CryptoState } from "../CryptoContext";
+import AuthModal from "./Authentication/AuthModal";
+import UserSidebar from "./Authentication/UserSidebar";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -35,7 +37,7 @@ const darkTheme = createTheme({
 
 function Header() {
   const classes = useStyles();
-  const { currency, setCurrency } = CryptoState();
+  const { currency, setCurrency, user } = CryptoState();
 
   const history = useHistory();
 
@@ -49,7 +51,7 @@ function Header() {
               variant="h6"
               className={classes.title}
             >
-              Crypto Hunter
+              N B 
             </Typography>
             {/* <Button color="inherit">Login</Button> */}
             <Select
@@ -61,8 +63,11 @@ function Header() {
               onChange={(e) => setCurrency(e.target.value)}
             >
               <MenuItem value={"USD"}>USD</MenuItem>
-              <MenuItem value={"INR"}>INR</MenuItem>
+              <MenuItem value={"NGN"}>NGN</MenuItem>
             </Select>
+
+          
+            {user ? <UserSidebar/> :  <AuthModal/>}
           </Toolbar>
         </Container>
       </AppBar>
